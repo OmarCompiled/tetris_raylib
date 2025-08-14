@@ -10,7 +10,9 @@ class Grid
 		Grid();
 		void Init();
 		void Draw();
+
 		int grid[20][10];
+
 	private:
 		int rows;
 		int cols;

@@ -1,6 +1,5 @@
 #include <raylib.h>
 
-#include "colors.h"
 #include "grid.h"
 
 Grid::Grid() {
@@ -9,15 +8,10 @@ Grid::Grid() {
   cellSize = 35;
   Init();
   colors = {
-		Gray,
-		Green,
-		Red,
-		Orange,
-		Yellow,
-		PURPLE,
-		SKYBLUE,
-		Blue
-	};
+      Color{30, 30, 54, 255},  Color{114, 203, 59, 255},
+      Color{255, 50, 19, 255}, Color{255, 151, 28, 255},
+      Color{255, 213, 0, 255}, Color{3, 65, 174, 255}
+  };
 }
 
 void Grid::Init() {
