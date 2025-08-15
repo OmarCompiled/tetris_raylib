@@ -16,6 +16,7 @@ int main() {
 		ClearBackground(BLUE);
 
 		game.Render();
+		
 
 		EndDrawing();
   }

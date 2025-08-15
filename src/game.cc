@@ -36,18 +36,47 @@ void
 Game::HandleInput()
 {
 	if(IsKeyPressed(KEY_DOWN)) {
-		currentBlock.MoveY();
+		currentBlock.MoveY(1);
+		if(BlockOutOfBounds()) {
+			currentBlock.MoveY(-1);
+		}
 	}
 
 	if(IsKeyPressed(KEY_RIGHT)) {
 		currentBlock.MoveX(1);
+		if(BlockOutOfBounds()) {
+			currentBlock.MoveX(-1);
+		}
 	}
 
 	if(IsKeyPressed(KEY_LEFT)) {
 		currentBlock.MoveX(-1);
+		if(BlockOutOfBounds()) {
+			currentBlock.MoveX(1);
+		}
 	}
 
 	if(IsKeyPressed(KEY_UP)) {
 		currentBlock.Rotate();
+		if(BlockOutOfBounds()) {
+			currentBlock.Rotate();
+			currentBlock.Rotate();
+			currentBlock.Rotate();
+		}
 	}
 }
+
+bool
+Game::BlockOutOfBounds()
+{
+	std::vector<Vector2> tiles = currentBlock.GetCells();
+	for(auto tile : tiles) {
+		if(grid.CellOutOfBounds(tile.x + currentBlock.rowOffset, tile.y + currentBlock.columnOffset)) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+

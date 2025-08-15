@@ -12,18 +12,17 @@ class Block {
 		void MoveX(int t = 1);
 		void MoveY(int t = 1);
 		void Rotate();
+		std::vector<Vector2> GetCells();
 
   	std::map<int, std::vector<Vector2>> cells;
   	int id;
+		int rowOffset;
+		int columnOffset;
 
 	private:
   	int cellSize;
   	int rotationState;
 		std::vector<Color> colors;
-
-	protected:
-		int rowOffset;
-		int columnOffset;
 };
 
 #endif

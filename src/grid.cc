@@ -4,7 +4,7 @@
 
 Grid::Grid() {
   rows = 20;
-  cols = 10;
+  columns = 10;
   cellSize = 35;
   Init();
   colors = {
@@ -14,20 +14,42 @@ Grid::Grid() {
   };
 }
 
-void Grid::Init() {
+void
+Grid::Init() {
   for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
+    for (int j = 0; j < columns; j++) {
       grid[i][j] = 0;
     }
   }
 }
 
-void Grid::Draw() {
+void
+Grid::Draw() {
   for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
+    for (int j = 0; j < columns; j++) {
       int cellValue = grid[i][j];
       DrawRectangle(j * cellSize + 1, i * cellSize + 1, cellSize - 1,
                     cellSize - 1, colors[cellValue]);
     }
   }
+}
+
+bool
+Grid::CellOutOfBounds(int row, int column)
+{
+	if(row >= 0 && row < rows && column >= 0 && column < columns) {
+		return false;
+	}
+
+	return true;
+}
+
+bool
+Grid::CellTouchedFloor(int row)
+{
+	if(row >= rows) {
+		return true;
+	}
+
+	return false;
 }

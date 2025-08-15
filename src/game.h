@@ -18,6 +18,8 @@ Game
 
 	private:
 		Block RandomBlock();
+		bool BlockOutOfBounds();
+		bool BlockTouchedFloor(std::vector<Vector2> tiles);
 
 		Block currentBlock;
 		Block nextBlock;

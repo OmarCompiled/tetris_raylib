@@ -41,3 +41,8 @@ Block::Rotate()
 	rotationState == cells.size() - 1 ?	rotationState = 0 : rotationState++;
 }
 
+std::vector<Vector2>
+Block::GetCells()
+{
+	return cells[rotationState];
+}
