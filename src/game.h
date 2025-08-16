@@ -13,6 +13,10 @@ Game
 		Game();
 		void Render();
 		void HandleInput();
+		void MoveBlockDown();
+		void MoveBlockRight();
+		void MoveBlockLeft();
+		void RotateBlock();
 
 		Grid grid;
 

@@ -36,32 +36,19 @@ void
 Game::HandleInput()
 {
 	if(IsKeyPressed(KEY_DOWN)) {
-		currentBlock.MoveY(1);
-		if(BlockOutOfBounds()) {
-			currentBlock.MoveY(-1);
-		}
+		MoveBlockDown();		
 	}
 
 	if(IsKeyPressed(KEY_RIGHT)) {
-		currentBlock.MoveX(1);
-		if(BlockOutOfBounds()) {
-			currentBlock.MoveX(-1);
-		}
+		MoveBlockRight();
 	}
 
 	if(IsKeyPressed(KEY_LEFT)) {
-		currentBlock.MoveX(-1);
-		if(BlockOutOfBounds()) {
-			currentBlock.MoveX(1);
-		}
+		MoveBlockLeft();
 	}
 
 	if(IsKeyPressed(KEY_UP)) {
-		int rotationState = currentBlock.GetRotationState();
-		currentBlock.Rotate();
-		if(BlockOutOfBounds()) {
-			currentBlock.Rotate(rotationState);
-		}
+		RotateBlock();
 	}
 }
 
@@ -78,4 +65,39 @@ Game::BlockOutOfBounds()
 	return false;
 }
 
+void
+Game::MoveBlockDown()
+{
+	currentBlock.MoveY(1);
+	if(BlockOutOfBounds()) {
+		currentBlock.MoveY(-1);
+	}
+}
 
+void
+Game::MoveBlockLeft()
+{
+	currentBlock.MoveX(-1);
+	if(BlockOutOfBounds()) {
+			currentBlock.MoveX(1);
+		}
+}
+
+void
+Game::MoveBlockRight()
+{
+	currentBlock.MoveX(1);
+	if(BlockOutOfBounds()) {
+		currentBlock.MoveX(-1);
+	}
+}
+
+void
+Game::RotateBlock()
+{
+	int rotationState = currentBlock.GetRotationState();
+	currentBlock.Rotate();
+		if(BlockOutOfBounds()) {
+			currentBlock.Rotate(rotationState);
+		}
+}
