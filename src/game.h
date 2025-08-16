@@ -18,6 +18,7 @@ Game
 		void MoveBlockLeft();
 		void RotateBlock();
 
+		int score;
 		Grid grid;
 
 	private:
@@ -26,6 +27,7 @@ Game
 		bool BlockFits();
 		void LockBlock();
 
+		bool gameover = false;
 		Block currentBlock;
 		Block nextBlock;
 		std::vector<Block> blocks;

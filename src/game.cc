@@ -1,4 +1,5 @@
 #include <random>
+#include <iostream>
 
 #include "game.h"
 
@@ -112,9 +113,13 @@ Game::LockBlock()
 	}
 
 	currentBlock = nextBlock;
-	nextBlock = RandomBlock();
+	if(!BlockFits()) {
+		gameover = true;
+	} else {
+		nextBlock = RandomBlock();
+	}
 
-	grid.ClearRows();
+	score += grid.ClearRows();
 }
 
 bool
