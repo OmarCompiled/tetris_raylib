@@ -36,13 +36,23 @@ Block::MoveY(int t)
 }
 
 void
-Block::Rotate()
+Block::Rotate(int t)
 {
-	rotationState == cells.size() - 1 ?	rotationState = 0 : rotationState++;
+	if(t < 0) {
+		rotationState == cells.size() - 1 ?	rotationState = 0 : rotationState++;
+	} else {
+		rotationState = t;
+	}
 }
 
 std::vector<Vector2>
 Block::GetCells()
 {
 	return cells[rotationState];
+}
+
+int
+Block::GetRotationState()
+{
+	return rotationState;
 }

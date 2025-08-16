@@ -1,7 +1,7 @@
-CC=g++
-FILE_NAMES=main.cc grid.cc blocks.cc block.cc game.cc
+FILENAMES=main.cc block.cc blocks.cc grid.cc game.cc
 FLAGS=-lraylib -lGL -lm -lpthread -ldl -lrt -lX11 -o
 EXE=tetris
+CC=g++
 
 default:
-	${CC} ${FILE_NAMES} ${FLAGS} ${EXE}
+	${CC} ${FILENAMES} ${FLAGS} ${EXE}

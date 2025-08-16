@@ -57,11 +57,10 @@ Game::HandleInput()
 	}
 
 	if(IsKeyPressed(KEY_UP)) {
+		int rotationState = currentBlock.GetRotationState();
 		currentBlock.Rotate();
 		if(BlockOutOfBounds()) {
-			currentBlock.Rotate();
-			currentBlock.Rotate();
-			currentBlock.Rotate();
+			currentBlock.Rotate(rotationState);
 		}
 	}
 }

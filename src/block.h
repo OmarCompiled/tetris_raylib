@@ -11,7 +11,8 @@ class Block {
 		void Draw();
 		void MoveX(int t = 1);
 		void MoveY(int t = 1);
-		void Rotate();
+		void Rotate(int t = -1);
+		int GetRotationState();
 		std::vector<Vector2> GetCells();
 
   	std::map<int, std::vector<Vector2>> cells;
