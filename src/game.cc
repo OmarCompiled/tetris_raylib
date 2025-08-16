@@ -69,8 +69,9 @@ void
 Game::MoveBlockDown()
 {
 	currentBlock.MoveY(1);
-	if(BlockOutOfBounds()) {
+	if(BlockOutOfBounds() || !BlockFits()) {
 		currentBlock.MoveY(-1);
+		LockBlock();
 	}
 }
 
@@ -78,7 +79,7 @@ void
 Game::MoveBlockLeft()
 {
 	currentBlock.MoveX(-1);
-	if(BlockOutOfBounds()) {
+	if(BlockOutOfBounds() || !BlockFits()) {
 			currentBlock.MoveX(1);
 		}
 }
@@ -87,7 +88,7 @@ void
 Game::MoveBlockRight()
 {
 	currentBlock.MoveX(1);
-	if(BlockOutOfBounds()) {
+	if(BlockOutOfBounds() || !BlockFits()) {
 		currentBlock.MoveX(-1);
 	}
 }
@@ -97,7 +98,34 @@ Game::RotateBlock()
 {
 	int rotationState = currentBlock.GetRotationState();
 	currentBlock.Rotate();
-		if(BlockOutOfBounds()) {
+		if(BlockOutOfBounds() || !BlockFits()) {
 			currentBlock.Rotate(rotationState);
 		}
+}
+
+void
+Game::LockBlock()
+{
+	std::vector<Vector2> tiles = currentBlock.GetCells();
+	for(auto tile : tiles) {
+		grid.grid[(int)tile.x + currentBlock.rowOffset][(int)tile.y + currentBlock.columnOffset] = currentBlock.id;
+	}
+
+	currentBlock = nextBlock;
+	nextBlock = RandomBlock();
+
+	grid.ClearRows();
+}
+
+bool
+Game::BlockFits()
+{
+	std::vector<Vector2> tiles = currentBlock.GetCells();
+	for(auto tile : tiles) {
+		if(!grid.CellEmpty(tile.x + currentBlock.rowOffset, tile.y + currentBlock.columnOffset)) {
+			return false;
+		}
+	}
+
+	return true;
 }

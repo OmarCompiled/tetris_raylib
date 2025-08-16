@@ -10,7 +10,8 @@ Grid::Grid() {
   colors = {
       Color{30, 30, 54, 255},  Color{114, 203, 59, 255},
       Color{255, 50, 19, 255}, Color{255, 151, 28, 255},
-      Color{255, 213, 0, 255}, Color{3, 65, 174, 255}
+      Color{255, 213, 0, 255}, SKYBLUE, PURPLE,
+			Color{3, 65, 174, 255}
   };
 }
 
@@ -29,7 +30,7 @@ Grid::Draw() {
     for (int j = 0; j < columns; j++) {
       int cellValue = grid[i][j];
       DrawRectangle(j * cellSize + 1, i * cellSize + 1, cellSize - 1,
-                    cellSize - 1, colors[cellValue]);
+                    cellSize - 1, colors.at(cellValue));
     }
   }
 }
@@ -45,11 +46,56 @@ Grid::CellOutOfBounds(int row, int column)
 }
 
 bool
-Grid::CellTouchedFloor(int row)
+Grid::CellEmpty(int row, int column)
 {
-	if(row >= rows) {
+	if(!grid[row][column]) {
 		return true;
 	}
 
 	return false;
+}
+
+bool
+Grid::RowComplete(int row)
+{
+	for(int column = 0; column < columns; column++) {
+		if(!grid[row][column]) {
+			return false;
+		}
+	}	
+
+	return true;
+}
+
+void
+Grid::ClearRow(int row)
+{
+	for(int column = 0; column < columns; column++) {
+		grid[row][column] = 0;
+	}
+}
+
+void
+Grid::PushRowDown(int row, int numberOfRows)
+{
+	for(int column = 0; column < columns; column++) {
+		grid[row + numberOfRows][column] = grid[row][column];
+		grid[row][column] = 0;
+	}
+}
+
+int
+Grid::ClearRows()
+{
+	int completedRows = 0;
+	for(int row = rows - 1; row >=0; row--) {
+		if(RowComplete(row)) {
+			ClearRow(row);
+			completedRows++;
+		} else if(completedRows > 0){
+			PushRowDown(row, completedRows);
+		}
+	}
+
+	return completedRows;
 }

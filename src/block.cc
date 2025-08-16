@@ -17,7 +17,7 @@ Block::Block()
 void
 Block::Draw()
 {
-	std::vector<Vector2> tiles = cells[rotationState];
+	std::vector<Vector2> tiles = cells.at(rotationState);
 	for(Vector2 v : tiles) {
 		DrawRectangle((v.y + columnOffset) * cellSize + 1, (v.x + rowOffset) * cellSize + 1, cellSize - 1, cellSize - 1, colors.at(id));
 	}
@@ -48,7 +48,7 @@ Block::Rotate(int t)
 std::vector<Vector2>
 Block::GetCells()
 {
-	return cells[rotationState];
+	return cells.at(rotationState);
 }
 
 int

@@ -20,14 +20,13 @@ TimePassed(double interval)
 int main() {
 	InitWindow(650, 900, "Tetris");
 	SetTargetFPS(60);
-	Game game = Game();
 
-  /* just for testing */
+	Game game = Game();
 
 	while (!WindowShouldClose()) {
 		game.HandleInput();		
 		
-		if(TimePassed(0.5)) {
+		if(TimePassed(0.3)) {
 			game.MoveBlockDown();
 		}
 
