@@ -8,7 +8,7 @@ Grid::Grid() {
   cellSize = 35;
   Init();
   colors = {
-      Color{30, 30, 54, 255},  Color{114, 203, 59, 255},
+      DARKGRAY, Color{114, 203, 59, 255},
       Color{255, 50, 19, 255}, Color{255, 151, 28, 255},
       Color{255, 213, 0, 255}, SKYBLUE, PURPLE,
 			Color{3, 65, 174, 255}
@@ -29,7 +29,7 @@ Grid::Draw() {
   for (int i = 0; i < rows; i++) {
     for (int j = 0; j < columns; j++) {
       int cellValue = grid[i][j];
-      DrawRectangle(j * cellSize + 1, i * cellSize + 1, cellSize - 1,
+      DrawRectangle(j * cellSize + 10, i * cellSize + 10, cellSize - 1,
                     cellSize - 1, colors.at(cellValue));
     }
   }

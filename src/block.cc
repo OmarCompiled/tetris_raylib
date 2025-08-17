@@ -19,7 +19,7 @@ Block::Draw()
 {
 	std::vector<Vector2> tiles = cells.at(rotationState);
 	for(Vector2 v : tiles) {
-		DrawRectangle((v.y + columnOffset) * cellSize + 1, (v.x + rowOffset) * cellSize + 1, cellSize - 1, cellSize - 1, colors.at(id));
+		DrawRectangle((v.y + columnOffset) * cellSize + 10, (v.x + rowOffset) * cellSize + 10, cellSize - 1, cellSize - 1, colors.at(id));
 	}
 }
 

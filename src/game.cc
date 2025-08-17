@@ -9,7 +9,9 @@ Game::Game()
 	grid = Grid();
 	blocks = {IBlock(), JBlock(), LBlock(),TBlock(), SBlock(), OBlock(), ZBlock()};
 	currentBlock = RandomBlock();
- 	nextBlock = RandomBlock();	
+ 	nextBlock = RandomBlock();
+	gameover = false;
+	score = 0;	
 }
 
 Block
@@ -36,6 +38,10 @@ Game::Render()
 void
 Game::HandleInput()
 {
+	if(gameover && GetKeyPressed()) {
+		Reset();
+	}
+
 	if(IsKeyPressed(KEY_DOWN)) {
 		MoveBlockDown();		
 	}
@@ -119,7 +125,7 @@ Game::LockBlock()
 		nextBlock = RandomBlock();
 	}
 
-	score += grid.ClearRows();
+	grid.ClearRows();
 }
 
 bool
@@ -133,4 +139,14 @@ Game::BlockFits()
 	}
 
 	return true;
+}
+
+void
+Game::Reset()
+{
+	grid.Init();
+	blocks = {IBlock(), JBlock(), LBlock(),TBlock(), SBlock(), OBlock(), ZBlock()};
+	currentBlock = RandomBlock();
+ 	nextBlock = RandomBlock();
+	gameover = false;	
 }
