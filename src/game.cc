@@ -150,3 +150,16 @@ Game::Reset()
  	nextBlock = RandomBlock();
 	gameover = false;	
 }
+
+void
+Game::LetBlockFall()
+{
+	while(true) {
+		if(!BlockOutOfBounds() && BlockFits()) {
+			currentBlock.MoveY(1);
+		} else {
+			currentBlock.MoveY(-1);
+			break;
+		}
+	}	
+}

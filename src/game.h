@@ -17,6 +17,7 @@ Game
 		void MoveBlockRight();
 		void MoveBlockLeft();
 		void RotateBlock();
+		void LetBlockFall();
 
 		bool gameover;
 		int score;
