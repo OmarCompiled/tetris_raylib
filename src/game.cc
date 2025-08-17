@@ -41,6 +41,10 @@ Game::HandleInput()
 	if(gameover && GetKeyPressed()) {
 		Reset();
 	}
+	
+	if(IsKeyPressed(KEY_SPACE)) {
+		LetBlockFall();
+	}	
 
 	if(IsKeyPressed(KEY_DOWN)) {
 		MoveBlockDown();		
@@ -75,39 +79,48 @@ Game::BlockOutOfBounds()
 void
 Game::MoveBlockDown()
 {
-	currentBlock.MoveY(1);
-	if(BlockOutOfBounds() || !BlockFits()) {
-		currentBlock.MoveY(-1);
-		LockBlock();
+	if(!gameover) {
+		currentBlock.MoveY(1);
+		if(BlockOutOfBounds() || !BlockFits()) {
+			currentBlock.MoveY(-1);
+			LockBlock();
+			score++;
+		}
 	}
 }
 
 void
 Game::MoveBlockLeft()
 {
-	currentBlock.MoveX(-1);
-	if(BlockOutOfBounds() || !BlockFits()) {
+	if(!gameover) {
+		currentBlock.MoveX(-1);
+		if(BlockOutOfBounds() || !BlockFits()) {
 			currentBlock.MoveX(1);
 		}
+	}
 }
 
 void
 Game::MoveBlockRight()
 {
-	currentBlock.MoveX(1);
-	if(BlockOutOfBounds() || !BlockFits()) {
-		currentBlock.MoveX(-1);
+	if(!gameover) {
+		currentBlock.MoveX(1);
+		if(BlockOutOfBounds() || !BlockFits()) {
+			currentBlock.MoveX(-1);
+		}
 	}
 }
 
 void
 Game::RotateBlock()
 {
-	int rotationState = currentBlock.GetRotationState();
-	currentBlock.Rotate();
+	if(!gameover) {
+		int rotationState = currentBlock.GetRotationState();
+		currentBlock.Rotate();
 		if(BlockOutOfBounds() || !BlockFits()) {
 			currentBlock.Rotate(rotationState);
 		}
+	}
 }
 
 void
@@ -124,8 +137,19 @@ Game::LockBlock()
 	} else {
 		nextBlock = RandomBlock();
 	}
+	
+	switch(grid.ClearRows()) {
+		case 1: 
+			score += 100;
+			break;
+		case 2:
+			score += 300;
+			break;
+		case 3:
+			score += 500;
+	}
 
-	grid.ClearRows();
+	std::clog << score << std::endl;
 }
 
 bool
@@ -148,7 +172,8 @@ Game::Reset()
 	blocks = {IBlock(), JBlock(), LBlock(),TBlock(), SBlock(), OBlock(), ZBlock()};
 	currentBlock = RandomBlock();
  	nextBlock = RandomBlock();
-	gameover = false;	
+	gameover = false;
+	score = 0;
 }
 
 void
