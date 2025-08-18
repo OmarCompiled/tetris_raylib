@@ -29,7 +29,7 @@ Block::DrawPreview(int offsetX, int offsetY)
 	rotationState = 0;
 	std::vector<Vector2> tiles = GetCells();
 	for(Vector2 tile : tiles) {
-		DrawRectangle(offsetX + tile.x * cellSize + 1, offsetY + tile.y * cellSize + 1, cellSize - 1, cellSize - 1,  colors.at(id));
+		DrawRectangle(offsetX + tile.y * cellSize + 1, offsetY + tile.x * cellSize + 1, cellSize - 1, cellSize - 1,  colors.at(id));
 	}
 }
 

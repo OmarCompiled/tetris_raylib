@@ -37,9 +37,9 @@ Game::Render()
 													hard code the offsets or change the whole draw function. Choosing the easier path :) */ 
 												/* Nevermind, I'll just make a new function :) */
 	if(nextBlock.id == 4) {
-		nextBlock.DrawPreview(472, 200);
+		nextBlock.DrawPreview(420, 200);
 	} else if(nextBlock.id == 6){
-		nextBlock.DrawPreview(465, 217);
+		nextBlock.DrawPreview(437, 217);
 	} else {
 		nextBlock.DrawPreview(455, 235);
 	}
