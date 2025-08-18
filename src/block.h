@@ -9,6 +9,7 @@ class Block {
 	public:
   	Block();
 		void Draw(int offsetX = 10, int offsetY = 10);
+		void DrawPreview(int offsetX, int offsetY);
 		void MoveX(int t = 1);
 		void MoveY(int t = 1);
 		void Rotate(int t = -1);

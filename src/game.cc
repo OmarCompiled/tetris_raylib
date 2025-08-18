@@ -33,8 +33,16 @@ Game::Render()
 {
 	grid.Draw();
 	currentBlock.Draw();
-	nextBlock.Draw(325, 225); /* NOTE: since I Draw blocks relative to the grid, I'll have to either
-														 hard code the offsets or change the whole draw function. Choosing the easier path :) */
+												/* NOTE: since I Draw blocks relative to the grid, I'll have to either
+													hard code the offsets or change the whole draw function. Choosing the easier path :) */ 
+												/* Nevermind, I'll just make a new function :) */
+	if(nextBlock.id == 4) {
+		nextBlock.DrawPreview(472, 200);
+	} else if(nextBlock.id == 6){
+		nextBlock.DrawPreview(465, 217);
+	} else {
+		nextBlock.DrawPreview(455, 235);
+	}
 }
 
 void

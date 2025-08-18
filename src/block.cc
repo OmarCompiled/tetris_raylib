@@ -17,9 +17,19 @@ Block::Block()
 void
 Block::Draw(int offsetX, int offsetY)
 {
-	std::vector<Vector2> tiles = cells.at(rotationState);
-	for(Vector2 v : tiles) {
-		DrawRectangle((v.y + columnOffset) * cellSize + offsetX, (v.x + rowOffset) * cellSize + offsetY, cellSize - 1, cellSize - 1, colors.at(id));
+	std::vector<Vector2> tiles = GetCells();
+	for(Vector2 tile : tiles) {
+		DrawRectangle((tile.y + columnOffset) * cellSize + offsetX, (tile.x + rowOffset) * cellSize + offsetY, cellSize - 1, cellSize - 1, colors.at(id));
+	}
+}
+
+void
+Block::DrawPreview(int offsetX, int offsetY)
+{
+	rotationState = 0;
+	std::vector<Vector2> tiles = GetCells();
+	for(Vector2 tile : tiles) {
+		DrawRectangle(offsetX + tile.x * cellSize + 1, offsetY + tile.y * cellSize + 1, cellSize - 1, cellSize - 1,  colors.at(id));
 	}
 }
 
