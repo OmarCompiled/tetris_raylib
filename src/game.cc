@@ -48,7 +48,7 @@ Game::Render()
 void
 Game::HandleInput()
 {
-	if(gameover && GetKeyPressed()) {
+	if(gameover && GetKeyPressed() == KEY_DOWN) {
 		Reset();
 	}
 	
@@ -188,12 +188,14 @@ Game::Reset()
 void
 Game::LetBlockFall()
 {
-	while(true) {
-		if(!BlockOutOfBounds() && BlockFits()) {
-			currentBlock.MoveY(1);
-		} else {
-			currentBlock.MoveY(-1);
-			break;
-		}
-	}	
+	if(!gameover) {
+		while(true) {
+			if(!BlockOutOfBounds() && BlockFits()) {
+				currentBlock.MoveY(1);
+			} else {
+				currentBlock.MoveY(-1);
+				break;
+			}
+		}	
+	}
 }

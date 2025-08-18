@@ -48,6 +48,8 @@ int main() {
 
 		if(game.gameover) {
 			DrawTextEx(retrobyte, "Gameover", Vector2{410, 400}, 38, 2, WHITE);
+			DrawTextEx(retrobyte, "Press Down", Vector2{410, 450}, 38, 2, WHITE);
+			DrawTextEx(retrobyte, "To Restart", Vector2{410, 490}, 38, 2, WHITE);
 		}
 
 		game.Render();
