@@ -25,9 +25,11 @@ int main() {
 	Font monospace = LoadFontEx("./RetroByte.ttf", 64, NULL, 0);
 
 	Game game = Game();
+	std::string score;
 
 	while (!WindowShouldClose()) {
-		std::string score = std::to_string(game.score);
+		score = std::to_string(game.score);
+		Vector2 scoreTextSize = MeasureTextEx(monospace, score.c_str(), 38, 2);
 
 		game.HandleInput();
 		
@@ -40,7 +42,7 @@ int main() {
 		
 		DrawTextEx(monospace, "Score", Vector2{410, 10}, 38, 2, WHITE);
 		DrawRectangleRounded(Rectangle{400, 50, 200, 70}, 0.3, 60, Color{32,32,32,255});
-		DrawTextEx(monospace, score.c_str(), Vector2{410, 60}, 38, 2, WHITE);
+		DrawTextEx(monospace, score.c_str(), Vector2{400 + (200 - scoreTextSize.x) / 2, 50 + (70 - scoreTextSize.y) / 2}, 38, 2, WHITE); /* Centering Score inside rectangle*/
 		DrawTextEx(monospace, "Next", Vector2{410, 140}, 38, 2, WHITE);
 		DrawRectangleRounded(Rectangle{400, 180, 180, 180}, 0.3, 60, Color{32,32,32,255});
 

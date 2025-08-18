@@ -33,6 +33,8 @@ Game::Render()
 {
 	grid.Draw();
 	currentBlock.Draw();
+	nextBlock.Draw(325, 225); /* NOTE: since I Draw blocks relative to the grid, I'll have to either
+														 hard code the offsets or change the whole draw function. Choosing the easier path :) */
 }
 
 void
@@ -134,6 +136,7 @@ Game::LockBlock()
 	currentBlock = nextBlock;
 	if(!BlockFits()) {
 		gameover = true;
+		return;
 	} else {
 		nextBlock = RandomBlock();
 	}
@@ -148,8 +151,6 @@ Game::LockBlock()
 		case 3:
 			score += 500;
 	}
-
-	std::clog << score << std::endl;
 }
 
 bool

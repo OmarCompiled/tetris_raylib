@@ -15,6 +15,7 @@ class Grid
 		bool CellEmpty(int row, int column);
 		
 		
+		int cellSize;
 		int grid[20][10];
 
 	private:
@@ -24,7 +25,6 @@ class Grid
 
 		int rows;
 		int columns;
-		int cellSize;
 		std::vector<Color> colors;
 };
 
